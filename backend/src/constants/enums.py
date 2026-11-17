@@ -1,3 +1,6 @@
 ROLES=('admin','operator','viewer')
-STATUSES=('queued','running','completed','failed')
+STATUSES=('queued','running','cancelling','cleanup_pending','completed','failed','cancelled','timeout')
+TERMINAL=('completed','failed','cancelled','timeout')
+ACTIVE=('queued','running','cancelling','cleanup_pending')
+PHASES=('queued','locking','baseline','indexing','measuring','cleanup','done')
 COLUMNS=('sensor_id','recorded_at','device_type','value')

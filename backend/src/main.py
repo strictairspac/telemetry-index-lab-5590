@@ -3,12 +3,15 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from sqlalchemy import text
 from src.config.database import engine
+from src.config.migrate import ensure_schema
 from src.services.experiments import queue
 from src.routes import auth,workloads,candidates,experiments,audit
 from src.middlewares.errors import install_errors
 from src.middlewares.requests import RequestTrace
 @asynccontextmanager
 async def lifespan(app):
+ try:ensure_schema()
+ except Exception:logging.exception('schema check failed; API remains available')
  if os.getenv('SEED_DEMO','true').lower()=='true':
   try:
    from scripts.seed_demo import seed

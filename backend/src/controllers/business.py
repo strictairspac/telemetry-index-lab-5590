@@ -6,3 +6,7 @@ def save_candidate(data,user,item_id=None):
  row=candidates.save(data,item_id);log(user.email,'candidate.save',row['name']);return row
 def start_experiment(data,user):
  row=experiments.create(data);log(user.email,'experiment.queue',row['name']);return row
+def cancel_experiment(item_id,user):
+ row,changed=experiments.cancel(item_id)
+ if changed:log(user.email,'experiment.cancel',row['name'])
+ return row

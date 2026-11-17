@@ -29,3 +29,4 @@ class CandidateInput(BaseModel):
 class ExperimentInput(BaseModel):
  name:str=Field(min_length=2,max_length=120)
  candidate_id:int
+ time_limit_seconds:int=Field(default=120,ge=10,le=3600)
